@@ -15,12 +15,14 @@ class JobController extends Controller
         $jobs->when(request('search'), function ($query) {
             $query->where(function ($query) {
                 $query->where('title', 'LIKE', '%' . request('search') . '%')
-                    ->orWhere('title', 'LIKE', '%' . request('search') . '%');
+                    ->orWhere('description', 'LIKE', '%' . request('search') . '%');
             });
         })->when(request('min_salary'), function ($query) {
             $query->where('salary', '>=', request('min_salary'));
         })->when(request('max_salary'), function ($query) {
             $query->where('salary', '<=', request('max_salary'));
+        })->when(request('experience'), function ($query) {
+            $query->where('experience', request('experience'));
         });
 
         // Use paginate instead of get

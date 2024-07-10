@@ -19,7 +19,25 @@
                             value="{{ request('max_salary') }}" />
                     </div>
                 </div>
-                <div>1</div>
+                <div>
+                    <div class="mb-1 font-semibold">Experience</div>
+                    <label for="experience" class="mb-1 flex items-center">
+                        <input type="radio" value="" name="experience" @checked(!request('experience')) />
+                        <span class="ml-2">All</span>
+                    </label>
+                    <label for="experience" class="mb-1 flex items-center">
+                        <input type="radio" value="entry" name="experience" @checked('entry' === request('experience')) />
+                        <span class="ml-2">Entry</span>
+                    </label>
+                    <label for="experience" class="mb-1 flex items-center">
+                        <input type="radio" value="intermediate" name="experience" @checked('intermediate' === request('experience')) />
+                        <span class="ml-2">Intermediate</span>
+                    </label>
+                    <label for="experience" class="mb-1 flex items-center">
+                        <input type="radio" value="senior" name="experience" @checked('senior' === request('experience')) />
+                        <span class="ml-2">Senior</span>
+                    </label>
+                </div>
                 <div>1</div>
             </div>
             <button
