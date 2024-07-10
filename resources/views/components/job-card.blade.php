@@ -13,6 +13,6 @@
             <x-tag>{{ $job->category }}</x-tag>
         </div>
     </div>
-    <p class="text-slate-500 text-sm mb-4">{!! nl2br(e($job->description)) !!}</p>
+    
     {{ $slot }}
 </x-card>

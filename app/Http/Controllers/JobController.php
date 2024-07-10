@@ -7,17 +7,30 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return view('job.index', ['jobs' => Job::simplePaginate()]);
+        $jobs = Job::query();
+
+        $jobs->when(request('search'), function ($query) {
+            $query->where(function ($query) {
+                $query->where('title', 'LIKE', '%' . request('search') . '%')
+                    ->orWhere('title', 'LIKE', '%' . request('search') . '%');
+            });
+        })->when(request('min_salary'), function ($query) {
+            $query->where('salary', '>=', request('min_salary'));
+        })->when(request('max_salary'), function ($query) {
+            $query->where('salary', '<=', request('max_salary'));
+        });
+
+        // Use paginate instead of get
+        $jobs = $jobs->simplePaginate(10); // 10 items per page
+
+        return view('job.index', ['jobs' => $jobs]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+
     public function create()
     {
         //
