@@ -23,7 +23,9 @@ class JobController extends Controller
             $query->where('salary', '<=', request('max_salary'));
         })->when(request('experience'), function ($query) {
             $query->where('experience', request('experience'));
-        });
+        })->when(request('category'), function ($query) {
+            $query->where('category', request('category'));
+        });;
 
         // Use paginate instead of get
         $jobs = $jobs->simplePaginate(10); // 10 items per page
