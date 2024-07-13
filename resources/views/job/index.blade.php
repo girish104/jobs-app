@@ -1,22 +1,22 @@
 <x-layout>
     <x-breadcrumps class="mb-4" :links="['Jobs' => Route('jobs.index')]" />
     <x-card class="mb-4 text-sm">
-        <form action="{{ route('jobs.index') }}" method="GET">
+        <form action="{{ route('jobs.index') }}" method="GET" id="filtering-form">
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <div class="mb-1 font-semibold">Search</div>
                     <x-text-input type="text" name="search" placeholder="Search For Any Job"
-                        value="{{ request('search') }}" />
+                        value="{{ request('search') }}" form-id="filtering-form" />
                 </div>
 
                 <div>
                     <div class="mb-1 font-semibold">Salary</div>
                     <div class="flex space-x-2">
                         <x-text-input type="text" name="min_salary" placeholder="From"
-                            value="{{ request('min_salary') }}" />
-                        <x-text-input type="text" name="max_salary" placeholder="TO"
-                            value="{{ request('max_salary') }}" />
+                            value="{{ request('min_salary') }}" form-id="filtering-form" />
+                        <x-text-input type="text" name="max_salary" placeholder="To"
+                            value="{{ request('max_salary') }}" form-id="filtering-form" />
                     </div>
                 </div>
                 <div>
@@ -28,8 +28,7 @@
                     <x-radio-group name='category' :options="\App\Models\Job::$category" />
                 </div>
             </div>
-            <button
-                class="w-full mt-4 border border-slate-200 shadow-sm hover:bg-slate-50 text-black p-2 font-semibold rounded-md">Filter</button>
+            <x-button class="w-full ">Filter</x-button>
         </form>
     </x-card>
     @foreach ($jobs as $job)
