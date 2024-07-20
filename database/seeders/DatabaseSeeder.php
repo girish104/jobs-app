@@ -10,11 +10,15 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+
     public function run(): void
     {
+
+        User::factory()->create([
+            'name' => 'girish',
+            'email' => 'girish@gmail.com'
+        ]);
+
         User::factory(200)->create();
         $users = User::all()->shuffle();
 
