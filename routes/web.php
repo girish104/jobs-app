@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
+use App\Models\JobApplication;
 
 Route::get('', fn () => to_route('jobs.index'));
 
@@ -15,3 +17,8 @@ Route::resource('auth', AuthController::class)->only(['create', 'store']);
 
 Route::delete('logout', fn () => to_route('auth.destory'))->name('logout');
 Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destory');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('job.application', JobApplicationController::class)
+        ->only(['create', 'store']);
+});
