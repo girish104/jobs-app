@@ -15,10 +15,12 @@
         <ul class="flex space-x-2">
             @auth
                 <li>
-                    {{ auth()->user()->name ?? 'anoynomus' }}
+                    <a href="{{ route('my-job-applications.index') }}"> {{ auth()->user()->name ?? 'anoynomus' }} :
+                        Applications
+                    </a>
                 </li>
                 <li>
-                    <form action="{{ route('auth.destory') }}" method="POST">
+                    <form action="{{ route('auth.destroy') }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button>Logout</button>
