@@ -20,13 +20,16 @@ class MyJobApplicationController extends Controller
                         'job.employer'
                     ])
                     ->latest()->get()
-            ] 
+            ]
         );
     }
 
 
-    public function destroy(string $id)
+    public function destroy(JobApplication $myJobApplication)
     {
-        //
+        $myJobApplication->delete();
+
+        return redirect()->back()
+            ->with('success', 'Job application removed');
     }
 }
