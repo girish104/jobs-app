@@ -30,8 +30,7 @@ class JobController extends Controller
             $query->where('category', request('category'));
         });;
 
-        // Use paginate instead of get
-        $jobs = $jobs->simplePaginate(10); // 10 items per page
+        $jobs = $jobs->latest()->simplePaginate(10); // 10 items per page
 
         return view('job.index', ['jobs' => $jobs]);
     }

@@ -25,11 +25,14 @@
         </ul>
         <ul class="flex space-x-6 items-center">
             @auth
-                <li >
+                <li>
                     <a href="{{ route('my-job-applications.index') }}"
                         class="text-gray-800 hover:text-blue-500 font-semibold text-lg flex items-center">
                         {{ auth()->user()->name ?? 'Anonymous' }} : Applications
                     </a>
+                </li>
+                <li>
+                    <a href="{{ route('my-jobs.index') }}">My Jobs</a>
                 </li>
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST" class="inline">
@@ -52,13 +55,21 @@
         </ul>
     </nav>
 
+    <div class="max-w-2xl mx-auto mt-20 px-4">
 
-    @if (session('success'))
-        <div class="my-8 mx-4 rounded-md border-l-4 border-green-300 p-4 text-green-700 bg-green-100 opacity-75">
-            <p class="font-bold">Success!</p>
-            <p> {{ session('success') }} </p>
-        </div>
-    @endif
+        @if (session('success'))
+            <div class="my-8 mx-4 rounded-md border-l-4 border-green-300 p-4 text-green-700 bg-green-100 opacity-75">
+                <p class="font-bold">Success!</p>
+                <p> {{ session('success') }} </p>
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="my-8 mx-4 rounded-md border-l-4 border-red-300 p-4 text-red-700 bg-red-100 opacity-75">
+                <p class="font-bold">Error!</p>
+                <p> {{ session('error') }} </p>
+            </div>
+        @endif
+    </div>
     <div class="max-w-2xl mx-auto mt-20 px-4">
         {{ $slot }}
     </div>
