@@ -1,2 +1,4 @@
 <a href="{{ $href }}"
-    class="rounded-md text-sm border border-slate-300 shadow-sm hover:bg-slate-100 font-semibold py-1 text-center px-2 text-black bg-white">{{ $slot }}</a>
+  class="rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-center text-sm font-semibold text-black shadow-sm hover:bg-slate-100">
+  {{ $slot }}
+</a>

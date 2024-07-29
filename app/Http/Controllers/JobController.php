@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
     public function index()
     {
+        $this->authorize('viewAny');
         $jobs = Job::query();
 
         $jobs->when(request('search'), function ($query) {
