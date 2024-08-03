@@ -5,7 +5,9 @@
         @can('apply', $job)
             <x-link-button :href="route('job.application.create', $job)">Apply</x-link-button>
         @else
-            <div class="text-center text-sm font-medium text-slate-500">You already applied to this job</div>
+            @auth
+                <div class="text-center text-sm font-medium text-slate-500">You already applied to this job</div>
+            @endauth
         @endcan
     </x-job-card>
     <x-card class="mb-4">
