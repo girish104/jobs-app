@@ -1,11 +1,11 @@
 <x-layout>
-    <h1 class="text-center text-slate-600 my-16 font-medium text-4xl">Sign in to your account!</h1>
+    <h1 class="text-center text-slate-600 my-16 font-medium text-3xl">Sign in to your account!</h1>
 
-    <x-card class="py-8 px-16">
+    <x-card class="py-8 px-16 m-5 shadow-md">
         <form action="{{ route('auth.store') }}" method="POST">
             @csrf
             <div class="mb-8">
-                <x-label for="email">E-mail</x-label>
+                <x-label for="email">Email</x-label>
                 <x-text-input name='email' />
             </div>
             <div class="mb-8">

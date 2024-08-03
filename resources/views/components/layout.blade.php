@@ -18,7 +18,7 @@
         <ul class="flex space-x-6 items-center">
             <li>
                 <a href="{{ route('jobs.index') }}"
-                    class="text-gray-800 hover:text-blue-500 font-semibold text-lg flex items-center">
+                    class="text-gray-800 hover:text-gray-600 font-semibold text-lg flex items-center">
                     <i class="fas fa-home mr-2"></i> Home
                 </a>
             </li>
@@ -27,28 +27,28 @@
             @auth
                 <li>
                     <a href="{{ route('my-job-applications.index') }}"
-                        class="text-gray-800 hover:text-blue-500 font-semibold text-lg flex items-center">
-                        {{ auth()->user()->name ?? 'Anonymous' }} : Applications
+                        class="text-gray-800 hover:text-gray-600 font-semibold text-lg flex items-center">
+                        Applications
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('my-jobs.index') }}">My Jobs</a>
+                    <a href="{{ route('my-jobs.index') }}"
+                        class="text-gray-800 hover:text-gray-600 font-semibold text-lg flex items-center">My Jobs</a>
                 </li>
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="text-gray-800 hover:text-red-500 font-semibold text-lg flex items-center focus:outline-none">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            class="hover:text-red-500 font-bold text-lg flex items-center focus:outline-none">
+                            Logout
                         </button>
                     </form>
                 </li>
             @else
                 <li>
                     <a href="{{ route('auth.create') }}"
-                        class="text-gray-800 hover:text-blue-500 font-semibold text-lg flex items-center">
-                        <i class="fas fa-sign-in-alt mr-2"></i> Sign In
+                        class="hover:text-red-500 font-bold text-lg flex items-center focus:outline-none">Sign In
                     </a>
                 </li>
             @endauth
