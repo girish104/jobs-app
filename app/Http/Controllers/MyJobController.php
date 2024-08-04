@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JobRequest;
 use App\Models\Job;
+use App\Models\JobApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class MyJobController extends Controller
 {
@@ -13,15 +16,12 @@ class MyJobController extends Controller
     public function index()
     {
         $this->authorize('viewAnyEmployer', Job::class);
-        return view(
-            'my_job.index',
-            [
-                'jobs' => auth()->user()->employer
-                    ->jobs()
-                    ->with(['employer', 'jobApplications', 'jobApplications.user'])
-                    ->get()
-            ]
-        );
+        return view('my_job.index', [
+            'jobs' => auth()->user()->employer
+                ->jobs()
+                ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                ->get()
+        ]);
     }
 
     /**
@@ -71,9 +71,32 @@ class MyJobController extends Controller
      */
     public function destroy(Job $myJob)
     {
+        $this->authorize('delete', $myJob);
         $myJob->delete();
 
         return redirect()->route('my-jobs.index')
             ->with('success', 'Job deleted.');
+    }
+    public function downloadCv(JobApplication $application)
+    {
+        $path = $application->cv_path;
+
+        // Log the requested path
+        logger('Requested CV Path: ' . $path);
+
+        // Check if path is null or empty
+        if (is_null($path) || $path === '') {
+            logger('CV path is missing.');
+            return redirect()->back()->with('error', 'CV path is missing.');
+        }
+
+        // Check if the file exists and download
+        if (Storage::disk('private')->exists($path)) {
+            // logger('File exists at path: ' . $path);
+            return Storage::disk('private')->download($path);
+        }
+
+        // logger('File not found at path: ' . $path);
+        return redirect()->back()->with('error', 'File not found.');
     }
 }

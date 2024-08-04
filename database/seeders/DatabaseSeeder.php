@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'girish',
             'email' => 'girish@gmail.com'
         ]);
+        User::factory()->create([
+            'name' => 'manish',
+            'email' => 'manish@gmail.com'
+        ]);
 
         User::factory(200)->create();
         $users = User::all()->shuffle();

@@ -42,4 +42,5 @@ class JobApplicationController extends Controller
     {
         //
     }
+    
 }

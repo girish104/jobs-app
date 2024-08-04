@@ -4,16 +4,19 @@
         <x-job-card :job="$application->job">
             <div class="flex items-center justify-between text-xs text-slate-500">
                 <div>
-                    <div>Applied {{ $application->created_at->diffForHumans() }}</div>
-                    <div>Other
+                    <div>
+                        <span class="font-semibold">Applied </span> {{ $application->created_at->diffForHumans() }}
+                    </div>
+                    <div> <span class="font-semibold">Other</span>
                         {{ Str::plural('applicant', $application->job->job_applications_count - 1) }}
                         {{ $application->job->job_applications_count - 1 }}
                     </div>
                     <div>
-                        Your asking salary ${{ number_format($application->expected_salary) }}
+                        <span class="font-semibold"> Your asking salary</span>
+                        ${{ number_format($application->expected_salary) }}
                     </div>
                     <div>
-                        Average asking salary
+                        <span class="font-semibold"> Average asking salary </span>
                         ${{ number_format($application->job->job_applications_avg_expected_salary) }}
                     </div>
                 </div>

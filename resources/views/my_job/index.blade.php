@@ -11,19 +11,26 @@
                 @forelse ($job->jobApplications as $application)
                     <div class="mb-4 flex items-center justify-between">
                         <div>
-                            <div>{{ $application->user->name }}</div>
+                            <div> <span class="font-semibold">{{ $application->user->name }}</span></div>
                             <div>
-                                Applied {{ $application->created_at->diffForHumans() }}
+                                <span class="font-semibold"> Applied
+                                </span>{{ $application->created_at->diffForHumans() }}
                             </div>
-                            <div>
-                                Download CV
+                            <div class="text-blue-500 cursor-pointer">
+                                <a href="{{ route('my-jobs.downloadCv', $application->id) }}" class="hover:underline">
+                                    Download CV
+                                </a>
+
                             </div>
+
+
+
                         </div>
 
                         <div>${{ number_format($application->expected_salary) }}</div>
                     </div>
                 @empty
-                    <div>No applications yet</div>
+                    <div class="mb-4">No applications yet</div>
                 @endforelse
 
                 <div class="flex space-x-2">
